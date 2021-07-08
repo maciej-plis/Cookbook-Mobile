@@ -1,4 +1,4 @@
-package com.example.cookbook
+package com.example.cookbook.recipes_activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -6,6 +6,7 @@ import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
+import com.example.cookbook.R
 import com.example.cookbook.databinding.ActivityRecipesBinding
 
 class RecipesActivity : AppCompatActivity() {

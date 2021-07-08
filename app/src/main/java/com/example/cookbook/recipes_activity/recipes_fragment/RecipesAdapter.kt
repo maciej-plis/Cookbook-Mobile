@@ -1,4 +1,4 @@
-package com.example.cookbook
+package com.example.cookbook.recipes_activity.recipes_fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,7 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.example.cookbook.R
 import com.example.cookbook.databinding.ItemRecipeBinding
+import com.example.cookbook.recipes_activity.Recipe
 
 class RecipesAdapter(private val recipes: MutableList<Recipe>) :
     RecyclerView.Adapter<RecipesAdapter.RecipeItemView>() {

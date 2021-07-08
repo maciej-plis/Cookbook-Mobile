@@ -1,13 +1,13 @@
-package com.example.cookbook
+package com.example.cookbook.recipes_activity.recipes_fragment
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.cookbook.R
 import com.example.cookbook.databinding.FragmentRecipesBinding
+import com.example.cookbook.recipes_activity.Recipe
 
 class RecipesFragment : Fragment() {
 
@@ -23,6 +23,7 @@ class RecipesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
+        setHasOptionsMenu(true)
         handleInputArgs()
 
         binding.recipesFragmentRvRecipes.apply {
@@ -31,15 +32,25 @@ class RecipesFragment : Fragment() {
         }
 
         binding.recipesFragmentSwipe.let { it.setOnRefreshListener { it.isRefreshing = false } }
-
-        binding.recipesFragmentFabSaveRecipe.setOnClickListener {
-            findNavController().navigate(R.id.navGraph_recipesFragment_action_createRecipe)
-        }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_recipes, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.menu_recipes_add_recipe -> {
+                findNavController().navigate(R.id.navGraph_recipesFragment_action_createRecipe)
+                return true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     private fun handleInputArgs() = arguments?.run {

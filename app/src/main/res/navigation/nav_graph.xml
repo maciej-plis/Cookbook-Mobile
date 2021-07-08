@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navGraph_recipesFragment"
-        android:name="com.example.cookbook.RecipesFragment"
+        android:name="com.example.cookbook.recipes_activity.recipes_fragment.RecipesFragment"
         android:label="Recipes"
         tools:layout="@layout/fragment_recipes">
         <action
@@ -20,7 +20,7 @@
 
     <fragment
         android:id="@+id/navGraph_recipeFragment"
-        android:name="com.example.cookbook.RecipeFragment"
+        android:name="com.example.cookbook.recipes_activity.recipe_fragment.RecipeFragment"
         android:label="Recipe"
         tools:layout="@layout/fragment_recipe">
         <action
@@ -33,7 +33,7 @@
 
     <fragment
         android:id="@+id/navGraph_createRecipeForm"
-        android:name="com.example.cookbook.CreateRecipeFormFragment"
+        android:name="com.example.cookbook.recipes_activity.recipe_form_fragment.CreateRecipeFormFragment"
         android:label="Add Recipe"
         tools:layout="@layout/fragment_recipe_form">
         <action
@@ -43,7 +43,7 @@
 
     <fragment
         android:id="@+id/navGraph_editRecipeForm"
-        android:name="com.example.cookbook.EditRecipeFormFragment"
+        android:name="com.example.cookbook.recipes_activity.recipe_form_fragment.EditRecipeFormFragment"
         android:label="Edit Recipe"
         tools:layout="@layout/fragment_recipe_form">
         <action

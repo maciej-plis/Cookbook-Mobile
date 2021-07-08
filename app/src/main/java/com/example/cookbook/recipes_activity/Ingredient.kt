@@ -1,4 +1,4 @@
-package com.example.cookbook
+package com.example.cookbook.recipes_activity
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize

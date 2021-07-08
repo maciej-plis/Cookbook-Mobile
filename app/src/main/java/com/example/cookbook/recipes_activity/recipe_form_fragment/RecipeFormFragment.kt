@@ -1,4 +1,4 @@
-package com.example.cookbook
+package com.example.cookbook.recipes_activity.recipe_form_fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,6 +7,9 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.fragment.app.Fragment
 import com.example.cookbook.databinding.FragmentRecipeFormBinding
+import com.example.cookbook.recipes_activity.Ingredient
+import com.example.cookbook.recipes_activity.IngredientsAdapter
+import com.example.cookbook.recipes_activity.Recipe
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.google.android.flexbox.JustifyContent
 

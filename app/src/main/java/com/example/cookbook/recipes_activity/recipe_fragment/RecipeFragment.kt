@@ -1,10 +1,13 @@
-package com.example.cookbook
+package com.example.cookbook.recipes_activity.recipe_fragment
 
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.example.cookbook.R
 import com.example.cookbook.databinding.FragmentRecipeBinding
+import com.example.cookbook.recipes_activity.IngredientsAdapter
+import com.example.cookbook.recipes_activity.Recipe
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.google.android.flexbox.JustifyContent.SPACE_AROUND
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -42,18 +45,18 @@ class RecipeFragment : Fragment() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_main, menu)
+        inflater.inflate(R.menu.menu_recipe, menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            R.id.menu_editRecipe -> {
+            R.id.menu_recipe_editRecipe -> {
                 findNavController().navigate(
                     R.id.navGraph_recipeFragment_action_editRecipe,
                     Bundle().apply { putParcelable("recipe", recipe) })
                 return true
             }
-            R.id.menu_deleteRecipe -> {
+            R.id.menu_recipe_deleteRecipe -> {
                 showDeleteConfirmationDialog()
                 return true
             }
