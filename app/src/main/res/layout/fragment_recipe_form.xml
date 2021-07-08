@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/recipeFormFragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/recipeFormFragment_inputLayout_recipeName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:hint="Recipe Name"
+                app:layout_constraintEnd_toStartOf="@+id/recipeFormFragment_rightGuideLine"
+                app:layout_constraintStart_toStartOf="@+id/recipeFormFragment_leftGuideLine"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_max="450dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/recipeFormFragment_input_recipeName"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="top|start"
+                    android:maxLength="255"
+                    android:singleLine="true" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toStartOf="@+id/recipeFormFragment_rightGuideLine"
+                app:layout_constraintStart_toStartOf="@+id/recipeFormFragment_leftGuideLine"
+                app:layout_constraintTop_toBottomOf="@+id/recipeFormFragment_inputLayout_recipeName"
+                app:layout_constraintWidth_max="450dp">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/recipeFormFragment_inputLayout_ingredientName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="Ingredient">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/recipeFormFragment_input_ingredientName"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="top|start"
+                        android:maxLength="128"
+                        android:singleLine="true" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/recipeFormFragment_btn_addIngredient"
+                    style="@style/Widget.App.Button.IconOnly"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="18dp"
+                    app:icon="@android:drawable/ic_input_add" />
+
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recipeFormFragment_rv_ingredients"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:layout_constraintEnd_toStartOf="@+id/recipeFormFragment_rightGuideLine"
+                app:layout_constraintHorizontal_bias="0.505"
+                app:layout_constraintStart_toStartOf="@+id/recipeFormFragment_leftGuideLine"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+                tools:itemCount="6"
+                tools:layoutManager="GridLayoutManager"
+                tools:listitem="@layout/item_ingredient"
+                tools:spanCount="2" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/recipeFormFragment_inputLayout_recipeDescription"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:hint="Description"
+                app:layout_constraintEnd_toStartOf="@+id/recipeFormFragment_rightGuideLine"
+                app:layout_constraintHorizontal_bias="0.505"
+                app:layout_constraintStart_toStartOf="@+id/recipeFormFragment_leftGuideLine"
+                app:layout_constraintTop_toBottomOf="@+id/recipeFormFragment_rv_ingredients"
+                app:layout_constraintWidth_max="450dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/recipeFormFragment_input_recipeDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="top"
+                    android:inputType="textMultiLine"
+                    android:maxLength="1020"
+                    android:minHeight="400dp"
+                    android:minLines="2" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/recipeFormFragment_leftGuideLine"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="0dp"
+                app:layout_constraintGuide_percent="0.05" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/recipeFormFragment_rightGuideLine"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="0dp"
+                app:layout_constraintGuide_percent="0.95" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/recipeFormFragment_fab_saveRecipe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        app:maxImageSize="35dp"
+        app:srcCompat="@android:drawable/ic_input_add" />
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

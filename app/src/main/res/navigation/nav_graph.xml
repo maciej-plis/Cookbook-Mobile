@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navGraph"
+    app:startDestination="@id/navGraph_recipesFragment">
+
+    <fragment
+        android:id="@+id/navGraph_recipesFragment"
+        android:name="com.example.cookbook.RecipesFragment"
+        android:label="Recipes"
+        tools:layout="@layout/fragment_recipes">
+        <action
+            android:id="@+id/navGraph_recipesFragment_action_createRecipe"
+            app:destination="@id/navGraph_createRecipeForm" />
+        <action
+            android:id="@+id/navGraph_recipesFragment_action_showRecipe"
+            app:destination="@id/navGraph_recipeFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navGraph_recipeFragment"
+        android:name="com.example.cookbook.RecipeFragment"
+        android:label="Recipe"
+        tools:layout="@layout/fragment_recipe">
+        <action
+            android:id="@+id/navGraph_recipeFragment_action_editRecipe"
+            app:destination="@id/navGraph_editRecipeForm" />
+        <action
+            android:id="@+id/navGraph_recipeFragment_action_deleteRecipe"
+            app:destination="@id/navGraph_recipesFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navGraph_createRecipeForm"
+        android:name="com.example.cookbook.CreateRecipeFormFragment"
+        android:label="Add Recipe"
+        tools:layout="@layout/fragment_recipe_form">
+        <action
+            android:id="@+id/navGraph_createRecipeForm_action_saveRecipe"
+            app:destination="@id/navGraph_recipesFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navGraph_editRecipeForm"
+        android:name="com.example.cookbook.EditRecipeFormFragment"
+        android:label="Edit Recipe"
+        tools:layout="@layout/fragment_recipe_form">
+        <action
+            android:id="@+id/navGraph_editRecipeForm_action_updateRecipe"
+            app:destination="@id/navGraph_recipeFragment"
+            app:popUpTo="@id/navGraph_recipeFragment"
+            app:popUpToInclusive="true"/>
+    </fragment>
+</navigation>

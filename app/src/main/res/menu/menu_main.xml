@@ -1,0 +1,14 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/menu_editRecipe"
+        android:icon="@android:drawable/ic_menu_edit"
+        android:title="Edit Recipe"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/menu_deleteRecipe"
+        android:icon="@android:drawable/ic_menu_delete"
+        android:title="Delete Recipe"
+        app:showAsAction="ifRoom" />
+</menu>
