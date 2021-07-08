@@ -29,12 +29,12 @@ abstract class RecipeFormFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        handleInputArgs()
-
         binding.recipeFormFragmentRvIngredients.apply {
             adapter = IngredientsAdapter()
             layoutManager = FlexboxLayoutManager(activity).apply { justifyContent = JustifyContent.SPACE_AROUND }
         }
+
+        handleInputArgs()
 
         binding.recipeFormFragmentBtnAddIngredient.setOnClickListener {
             val ingredientNameInput = binding.recipeFormFragmentInputIngredientName

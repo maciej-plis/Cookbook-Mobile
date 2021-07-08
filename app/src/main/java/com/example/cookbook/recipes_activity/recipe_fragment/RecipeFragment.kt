@@ -28,14 +28,13 @@ class RecipeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        setHasOptionsMenu(true)
-        handleInputArgs()
-
         binding.recipeFragmentRvIngredients.apply {
             adapter = IngredientsAdapter()
             layoutManager = FlexboxLayoutManager(activity).apply { justifyContent = SPACE_AROUND }
         }
 
+        setHasOptionsMenu(true)
+        handleInputArgs()
         setRecipeFields()
     }
 
@@ -70,7 +69,7 @@ class RecipeFragment : Fragment() {
             .setPositiveButton("Yes") { _, _ ->
                 findNavController().navigate(
                     R.id.navGraph_recipeFragment_action_deleteRecipe,
-                    Bundle().apply { putParcelable("recipe", recipe) })
+                    Bundle().apply { putParcelable("deleteRecipe", recipe) })
             }
             .setNegativeButton("No") { _, _ -> }
             .show()

@@ -28,7 +28,9 @@
             app:destination="@id/navGraph_editRecipeForm" />
         <action
             android:id="@+id/navGraph_recipeFragment_action_deleteRecipe"
-            app:destination="@id/navGraph_recipesFragment" />
+            app:destination="@id/navGraph_recipesFragment"
+            app:popUpTo="@id/navGraph_recipesFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
@@ -50,6 +52,6 @@
             android:id="@+id/navGraph_editRecipeForm_action_updateRecipe"
             app:destination="@id/navGraph_recipeFragment"
             app:popUpTo="@id/navGraph_recipeFragment"
-            app:popUpToInclusive="true"/>
+            app:popUpToInclusive="true" />
     </fragment>
 </navigation>

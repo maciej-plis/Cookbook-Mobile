@@ -23,13 +23,13 @@ class RecipesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        setHasOptionsMenu(true)
-        handleInputArgs()
-
         binding.recipesFragmentRvRecipes.apply {
             adapter = RecipesAdapter(RecipesDatabase.recipes)
             layoutManager = LinearLayoutManager(activity)
         }
+
+        setHasOptionsMenu(true)
+        handleInputArgs()
 
         binding.recipesFragmentSwipe.let { it.setOnRefreshListener { it.isRefreshing = false } }
     }
@@ -54,7 +54,7 @@ class RecipesFragment : Fragment() {
     }
 
     private fun handleInputArgs() = arguments?.run {
-        getParcelable<Recipe>("recipe")?.let { getRecipesAdapter().addRecipe(it) }
+        getParcelable<Recipe>("addRecipe")?.let { getRecipesAdapter().addRecipe(it) }
         clear()
     }
 
