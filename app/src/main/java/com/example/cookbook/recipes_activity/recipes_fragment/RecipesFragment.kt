@@ -2,12 +2,18 @@ package com.example.cookbook.recipes_activity.recipes_fragment
 
 import android.os.Bundle
 import android.view.*
+import android.widget.Toast
+import android.widget.Toast.LENGTH_SHORT
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cookbook.R
+import com.example.cookbook.RetrofitEventListener
 import com.example.cookbook.databinding.FragmentRecipesBinding
 import com.example.cookbook.recipes_activity.Recipe
+import com.example.cookbook.recipes_activity.RecipesApi
+import com.example.cookbook.recipes_activity.RecipesApiRestClient
+import retrofit2.Call
 
 class RecipesFragment : Fragment() {
 
@@ -24,14 +30,17 @@ class RecipesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         binding.recipesFragmentRvRecipes.apply {
-            adapter = RecipesAdapter(RecipesDatabase.recipes)
+            adapter = RecipesAdapter()
             layoutManager = LinearLayoutManager(activity)
         }
 
         setHasOptionsMenu(true)
-        handleInputArgs()
 
-        binding.recipesFragmentSwipe.let { it.setOnRefreshListener { it.isRefreshing = false } }
+        binding.recipesFragmentSwipe.setOnRefreshListener {
+            RecipesApiRestClient.getRecipes(GetRecipesEventListener())
+        }
+
+        RecipesApiRestClient.getRecipes(GetRecipesEventListener())
     }
 
     override fun onDestroyView() {
@@ -53,11 +62,17 @@ class RecipesFragment : Fragment() {
         }
     }
 
-    private fun handleInputArgs() = arguments?.run {
-        getParcelable<Recipe>("addRecipe")?.let { getRecipesAdapter().addRecipe(it) }
-        clear()
-    }
-
-
     private fun getRecipesAdapter(): RecipesAdapter = binding.recipesFragmentRvRecipes.adapter as RecipesAdapter
+
+    inner class GetRecipesEventListener : RetrofitEventListener<List<Recipe>> {
+        override fun onSuccess(call: Call<List<Recipe>>, response: List<Recipe>) {
+            getRecipesAdapter().setRecipes(response)
+            binding.recipesFragmentSwipe.isRefreshing = false
+        }
+
+        override fun onError(call: Call<List<Recipe>>, t: Throwable) {
+            Toast.makeText(activity, "Unable to download recipes", LENGTH_SHORT).show()
+            binding.recipesFragmentSwipe.isRefreshing = false
+        }
+    }
 }

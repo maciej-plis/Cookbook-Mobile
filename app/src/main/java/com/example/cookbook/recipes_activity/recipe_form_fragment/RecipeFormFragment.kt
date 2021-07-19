@@ -18,7 +18,7 @@ abstract class RecipeFormFragment : Fragment() {
     private var _binding: FragmentRecipeFormBinding? = null
     private val binding get() = _binding!!
 
-    private var recipe: Recipe? = null
+    private var recipeId: String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -34,13 +34,13 @@ abstract class RecipeFormFragment : Fragment() {
             layoutManager = FlexboxLayoutManager(activity).apply { justifyContent = JustifyContent.SPACE_AROUND }
         }
 
-        handleInputArgs()
+        handleArguments()
 
         binding.recipeFormFragmentBtnAddIngredient.setOnClickListener {
             val ingredientNameInput = binding.recipeFormFragmentInputIngredientName
 
             if (ingredientNameInput.text.isNullOrBlank()) {
-                binding.recipeFormFragmentInputLayoutIngredientName.error = "Ingredient name cannot be bolank"
+                binding.recipeFormFragmentInputLayoutIngredientName.error = "Ingredient name cannot be blank"
             } else {
                 getIngredientsAdapter().addIngredient(Ingredient(ingredientNameInput.getTextAsString()))
                 ingredientNameInput.text?.clear()
@@ -63,11 +63,9 @@ abstract class RecipeFormFragment : Fragment() {
             }
 
             if (valid) {
-                navigateAfterSave(recipe)
+                saveValidRecipe(recipe)
             }
         }
-
-        setRecipeFields()
     }
 
     override fun onDestroyView() {
@@ -75,27 +73,29 @@ abstract class RecipeFormFragment : Fragment() {
         _binding = null
     }
 
-    protected abstract fun navigateAfterSave(recipe: Recipe)
+    protected abstract fun saveValidRecipe(recipe: Recipe)
 
-    private fun handleInputArgs() = arguments?.run {
-        getParcelable<Recipe>("recipe")?.let { recipe = it }
-        clear()
+    private fun handleArguments() {
+        val recipe = arguments?.getParcelable<Recipe>("recipe")
+
+        recipe?.let {
+            recipeId = recipe.id
+            setRecipeFields(recipe)
+        }
     }
 
-
-    private fun setRecipeFields() = recipe?.let {
-        binding.recipeFormFragmentInputRecipeName.setText(it.name)
-        binding.recipeFormFragmentInputRecipeDescription.setText(it.description)
-        getIngredientsAdapter().setIngredients(it.ingredients)
+    private fun setRecipeFields(recipe: Recipe) {
+        binding.recipeFormFragmentInputRecipeName.setText(recipe.name)
+        binding.recipeFormFragmentInputRecipeDescription.setText(recipe.description)
+        getIngredientsAdapter().setIngredients(recipe.ingredients)
     }
-
 
     private fun getRecipeFromFields(): Recipe = Recipe(
+        recipeId,
         binding.recipeFormFragmentInputRecipeName.getTextAsString(),
         binding.recipeFormFragmentInputRecipeDescription.getTextAsString(),
         getIngredientsAdapter().getIngredients()
     )
-
 
     private fun getIngredientsAdapter(): IngredientsAdapter =
         binding.recipeFormFragmentRvIngredients.adapter as IngredientsAdapter

@@ -10,7 +10,7 @@ import com.example.cookbook.R
 import com.example.cookbook.databinding.ItemRecipeBinding
 import com.example.cookbook.recipes_activity.Recipe
 
-class RecipesAdapter(private val recipes: MutableList<Recipe>) :
+class RecipesAdapter(private var recipes: MutableList<Recipe> = ArrayList()) :
     RecyclerView.Adapter<RecipesAdapter.RecipeItemView>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipeItemView {
@@ -27,6 +27,11 @@ class RecipesAdapter(private val recipes: MutableList<Recipe>) :
         notifyItemInserted(recipes.lastIndex)
     }
 
+    fun setRecipes(recipes: List<Recipe>) {
+        this.recipes = recipes.toMutableList()
+        notifyDataSetChanged()
+    }
+
     inner class RecipeItemView(private val binding: ItemRecipeBinding) :
         RecyclerView.ViewHolder(binding.root), View.OnClickListener {
 
@@ -41,7 +46,7 @@ class RecipesAdapter(private val recipes: MutableList<Recipe>) :
         override fun onClick(v: View?) {
             itemView.findNavController().navigate(
                 R.id.navGraph_recipesFragment_action_showRecipe,
-                Bundle().apply { putParcelable("recipe", recipes[layoutPosition]) })
+                Bundle().apply { putString("recipeId", recipes[layoutPosition].id) })
         }
     }
 }
